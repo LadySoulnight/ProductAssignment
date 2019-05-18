@@ -1,0 +1,62 @@
+---
+title: "Product assigment"
+author: "Soulnight"
+date: "17 Mai 2019"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r, warning=FALSE, message=FALSE}
+library(dplyr)
+library(ggplot2)
+```
+
+## What the app does
+
+The created application uses the WorldPhones dataset the user may select the region or the year and is then shown the statsitic for the chosed data. 
+
+## The data
+
+The WorldPhones Dataset
+
+```{r}
+WorldPhones
+
+```
+
+
+## Example for the region 
+
+If the user chose Africa for example, this is what he/she gets:
+
+```{r, echo = TRUE}
+
+data <- WorldPhones[, 6] * 1000
+data <- data.frame(data,year = as.numeric(names(data)) )
+
+ggplot(data, aes(x = year, y = data)) + xlab("Year") +ylab("Number of phones") + 
+      geom_bar(stat = "identity") + 
+      geom_smooth(method = "lm")
+
+    
+    
+```
+
+## Example for the year
+
+If the user chose 1960 for example, this is what he/she gets:
+
+```{r, echo = TRUE}
+
+data2 <- WorldPhones[6, ] * 1000
+data2 <- data.frame(data2,region = names(data2))
+
+    
+ggplot(data2, aes(x = reorder(region, data2), y = data2)) + xlab("Region") +ylab("Number of phones") + 
+      geom_bar(stat = "identity")
+
+```
+

@@ -1,5 +1,6 @@
 library(shiny)
 library(datasets)
+library(ggplot2)
 
 function(input, output) {
   output$plot_by_region <- renderPlot({
